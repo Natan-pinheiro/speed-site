@@ -1,0 +1,24 @@
+.header{
+
+    background-color: black;
+    position: relative;
+    width: 100%;
+    height: 80px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+   
+}
+
+.header .container{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.header .navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
