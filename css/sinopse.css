@@ -1,0 +1,15 @@
+.sinopse{
+
+
+    height: 90%;
+    width: 100%;
+
+    background-image: url(https://www.hollywoodreporter.com/wp-content/uploads/2019/04/speed_racer_-_h_-_2008.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-sinopse{
+    color: white;
+    background-color: #FF0000;
+}
