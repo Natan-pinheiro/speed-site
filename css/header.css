@@ -48,3 +48,15 @@
 
 
 }
+
+.header a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.header a:hover {
+    color:#FF0000; 
+    text-decoration:none; 
+    cursor:pointer;
+    transition-duration: 300ms;
+}
