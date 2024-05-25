@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Site | Cadastro</title>
+    
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/global.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="./index.html">
+                <img class="logo" src="https://seeklogo.com/images/S/speed-racer-logo-28C8FDA360-seeklogo.com.png" alt="speed-logo">
+            </a>
+            <h1 class="titulo-navbar">Speed Site</h1>
+            <ul class="navbar">
+                <li>
+                    <a href="./login.html">Ir para o login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="erros" class="div-erros">
+
+    </div>
+    <div class="container-cadastro">
+        <div class="cadastro">
+            <label for="nome">Nome:</label><br>
+            <input class="input-cadastro" type="text" id="input_nome" name="nome" placeholder="Speed Racer"><br>
+            <label for="email">Email:</label><br>
+            <input class="input-cadastro" type="text" id="input_email" name="email" placeholder="speed.racer@email.com"><br>
+            <label for="senha">Senha:</label><br>
+            <input class="input-cadastro" type="password" id="input_senha" name="senha" placeholder="XXXXXXXXXXXXX"><br>
+            <label for="confSenha">Confirme sua senha:</label><br>
+            <input class="input-cadastro" type="password" id="input_confSenha" name="confSenha" placeholder="XXXXXXXXXXXXX"><br>
+            <br>
+            <button class="botao" onclick="cadastrar()">Cadastrar</button>
+        </div>
+    </div> 
+</body>
+</html>
+
+<script>
+
+    function cadastrar()
+    {
+        const nome = input_nome.value
+        const email = input_email.value
+        const senha = input_senha.value
+        const confSenha = input_confSenha.value
+
+        let naoTemNumero = true;
+    
+        for(i = 0; i < 9; i++)
+        {
+            if(senha.indexOf(i) != -1 )
+            {
+                naoTemNumero = false;
+            }
+        }
+
+        if(!nome || !email || !senha || !confSenha)
+        {
+            erros.style.display = "block";
+            erros.innerHTML = "Preencha todos os campos!"
+        }
+        else if(nome.length <= 2)
+        {
+            erros.style.display = "block";
+            erros.innerHTML = "O nome deve ter mais que 2 caracteres!";
+        }
+        else if(email.indexOf("@") == -1 || email.indexOf(".com") == -1)
+        {
+            erros.style.display = "block";
+            erros.innerHTML = "Insira um email válido!";
+        }
+        else if(senha.length <= 5)
+        {
+            erros.style.display = "block";
+            erros.innerHTML = "A senha precisa ter mais que 5 caracteres!";
+        }
+        else if(naoTemNumero)
+        {
+            erros.style.display = "block";
+            erros.innerHTML = "A senha precisa conter um número!";
+        }
+        else if(senha != confSenha)
+        {
+            erros.style.display = "block";
+            erros.innerHTML = "As senhas não estão iguais!";
+        }
+        else
+        {
+            fetch("/speedUsuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senha
+                })
+            })
+        }
+
+        limparErros();
+    }
+    function limparErros()
+    {
+        setTimeout(()=>{
+            const erros = document.getElementById("erros")
+
+            erros.style.display = "none";
+        },3000);
+    }
+</script>
