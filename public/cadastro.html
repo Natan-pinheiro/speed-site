@@ -7,6 +7,8 @@
     
     <link rel="stylesheet" href="./css/cadastro.css">
     <link rel="stylesheet" href="./css/global.css">
+
+    <link rel="icon" href="./assets/icon/speed-icon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="header">
@@ -14,7 +16,7 @@
             <a href="./index.html">
                 <img class="logo" src="https://seeklogo.com/images/S/speed-racer-logo-28C8FDA360-seeklogo.com.png" alt="speed-logo">
             </a>
-            <h1 class="titulo-navbar">Speed Site</h1>
+            <h1 class="titulo-navbar"><a href="./index.html">Speed Site</a></h1>
             <ul class="navbar">
                 <li>
                     <a href="./login.html">Ir para o login</a>
@@ -47,37 +49,37 @@
 
     function cadastrar()
     {
-        const nome = input_nome.value
-        const email = input_email.value
-        const senha = input_senha.value
+        const nomeVar = input_nome.value
+        const emailVar = input_email.value
+        const senhaVar = input_senha.value
         const confSenha = input_confSenha.value
 
         let naoTemNumero = true;
     
         for(i = 0; i < 9; i++)
         {
-            if(senha.indexOf(i) != -1 )
+            if(senhaVar.indexOf(i) != -1 )
             {
                 naoTemNumero = false;
             }
         }
 
-        if(!nome || !email || !senha || !confSenha)
+        if(!nomeVar || !emailVar || !senhaVar || !confSenha)
         {
             erros.style.display = "block";
             erros.innerHTML = "Preencha todos os campos!"
         }
-        else if(nome.length <= 2)
+        else if(nomeVar.length <= 2)
         {
             erros.style.display = "block";
             erros.innerHTML = "O nome deve ter mais que 2 caracteres!";
         }
-        else if(email.indexOf("@") == -1 || email.indexOf(".com") == -1)
+        else if(emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1)
         {
             erros.style.display = "block";
             erros.innerHTML = "Insira um email válido!";
         }
-        else if(senha.length <= 5)
+        else if(senhaVar.length <= 5)
         {
             erros.style.display = "block";
             erros.innerHTML = "A senha precisa ter mais que 5 caracteres!";
@@ -87,7 +89,7 @@
             erros.style.display = "block";
             erros.innerHTML = "A senha precisa conter um número!";
         }
-        else if(senha != confSenha)
+        else if(senhaVar != confSenha)
         {
             erros.style.display = "block";
             erros.innerHTML = "As senhas não estão iguais!";
@@ -100,12 +102,17 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    nomeServer: nome,
-                    emailServer: email,
-                    senhaServer: senha
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
                 })
             })
+            
+            levarParaLogin()
         }
+        
+            
+
 
         limparErros();
     }
@@ -116,5 +123,15 @@
 
             erros.style.display = "none";
         },3000);
+    }
+    function levarParaLogin()
+    {
+        erros.style.display = "flex";
+        erros.innerHTML = "Redirecionando para o login..."
+        setTimeout(()=>{
+            const erros = document.getElementById("erros")
+
+            window.location.href = "./login.html"
+        },4000);
     }
 </script>

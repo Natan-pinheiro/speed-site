@@ -1,0 +1,13 @@
+.dashboard{
+    height: 100%;
+    width: 100%;
+    
+    background-color: aliceblue;
+}
+.container-graficos{
+    display: flex;
+    justify-content: space-around;
+}
+.div-graficos{
+    width: 70%;
+}

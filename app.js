@@ -25,6 +25,7 @@ var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
 
 var speedUsuariosRouter = require("./src/routes/speedUsuarios");
+var speedDashboardRouter = require("./src/routes/speedDashboard")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,6 +42,7 @@ app.use("/aquarios", aquariosRouter);
 app.use("/empresas", empresasRouter);
 
 app.use("/speedUsuarios", speedUsuariosRouter);
+app.use("/speedDashboard", speedDashboardRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
@@ -50,7 +52,8 @@ app.listen(PORTA_APP, function () {
     ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
     #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
     ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
-    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
+    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######
+
     \n\n\n                                                                                                 
     Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n
     Você está rodando sua aplicação em ambiente de .:${process.env.AMBIENTE_PROCESSO}:. \n\n
