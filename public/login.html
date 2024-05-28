@@ -44,15 +44,18 @@
 <script>
     function entrar() {
         
-
+        
         var emailVar = input_email.value;
+        console.log(emailVar)
         var senhaVar = input_senha.value;
+        console.log(senhaVar)
 
         if (emailVar == "" || senhaVar == "") {
             erros.style.display = "block";
             erros.innerHTML = "Preencha todos os campos!";
         }
         
+       
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
@@ -64,6 +67,7 @@
             body: JSON.stringify({
                 emailServer: emailVar,
                 senhaServer: senhaVar
+                
             })
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")

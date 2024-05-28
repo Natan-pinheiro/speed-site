@@ -1,0 +1,67 @@
+.quiz{
+    height: 100%;
+    width: 100%;
+    
+    background-image: url(https://reparadorsa.com.br/wp-content/uploads/2020/05/1HEADER-speed.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container-pergunta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pergunta{
+    font-weight: bolder;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #FF0000;
+    color: white;
+    font-size: 50px;
+    padding: 20px;
+    border: solid;
+    border-color: yellow;
+    border-radius: 10px;
+}
+.container-alternativas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.alternativas{
+    padding-top: 20%;
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 50%;
+}
+.alternativas button{
+    background-color: red;
+    color: rgb(255, 255, 255);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-radius: 100px;
+    border-style: none;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 30px;
+    transition-duration: 300ms;
+}
+.alternativas button:hover{
+    background-color: #ba0000;
+    cursor: pointer;
+}
+.quiz > button{
+    background-color: red;
+    color: rgb(255, 255, 255);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-radius: 100px;
+    border-style: none;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 30px;
+    transition-duration: 300ms;
+}
+.quiz > button:hover{
+    background-color: #ba0000;
+    cursor: pointer;
+}

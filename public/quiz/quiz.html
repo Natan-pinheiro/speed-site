@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Site | Quiz</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/quiz/header.css">
+    <link rel="stylesheet" href="../css/quiz/quiz.css">
+    
+    <link rel="icon" href="../assets/icon/speed-icon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="quiz" class="quiz">
+        <h1 class="titulo-site">Speed Quiz</h1>
+        <div class="container-pergunta">
+            <div id="pergunta" class="pergunta"></div>
+        </div>
+        <div class="container-alternativas">
+            <div id="alternativas" class="alternativas"></div>
+        </div>
+      </div>
+</body>
+</html>
+
+<script>
+    const speedQuiz = 
+    [
+        {
+        pergunta: "Qual a verdadeira identidade do Corredor X?",
+        alternativas: ["Rex Racer", "Pops Racer", "Sparky", "Chim Chim"],
+        resposta: "Rex Racer"
+        },
+        {
+        pergunta: "Quantos anos tem speed?",
+        alternativas: ["20", "18", "30", "25"],
+        resposta: "18"
+        },
+        {
+        pergunta: "Qual o verdadeiro nome de Mom Racer?",
+        alternativas: ["Trixie Racer", "Catherine Racer", "Madeline Racer", "Mom Racer"],
+        resposta: "Mom Racer"
+        },
+        {
+        pergunta: "Qual o nome do carro dirigido por speed, no final do filme?",
+        alternativas: ["Augury", "Seppuku", "Mach 6", "Shooting Star"],
+        resposta: "Mach 6"
+        },
+        {
+        pergunta: "Qual o carro dirigido pelo Corredor X, no filme?",
+        alternativas: ["Mach 5", "Augury", "Mach 5", "Seppuku"],
+        resposta: "Augury"
+        },
+        {
+        pergunta: "Como speed ativa as funcionalidades do seu carro?",
+        alternativas: ["Pelo banco", "Pelo volante", "Pelo freio de mão", "Pelo painel"],
+        resposta: "Pelo volante"
+        },
+        {
+        pergunta: "Qual o nome do carro deixado para Speed, pelo seu irmão Rex?",
+        alternativas: ["Augury", "Mach 6", "Mach 5", "Seppuku"],
+        resposta: "Mach 5"
+        },
+        {
+        pergunta: "Quando speed conheceu trixie?",
+        alternativas: ["Quando crianças", "Quando adolescentes", "Quando adultos", "Quando velhos"],
+        resposta: "Quando crianças"
+        },
+        {
+        pergunta: "Qual o nome do vilão do filme?",
+        alternativas: ["Pops Racer", "Arnold Royalton", "Sprittle Racer", "Corredor X"],
+        resposta: "Arnold Royalton"
+        },
+        {
+        pergunta: "O que os corredores bebem, no final das corridas, quando ganham?",
+        alternativas: ["Refrigerante", "Água", "Leite", "Champagne"],
+        resposta: "Leite"
+        }
+    ]
+
+    const perguntaElemento = document.getElementById("pergunta");
+    const alternativas = document.getElementById("alternativas");
+
+    let perguntaAtual = 0;
+    let certas = 0;
+    let erradas = 0;
+
+    function mostrarPergunta()
+    {
+        const pergunta = speedQuiz[perguntaAtual];
+
+        perguntaElemento.innerText = pergunta.pergunta;
+
+        alternativas.innerHTML = "";
+
+        pergunta.alternativas.forEach(alternativa => {
+            const botao = document.createElement("button");
+            botao.innerText = alternativa;
+            alternativas.appendChild(botao);
+            botao.addEventListener("click", selecionarResposta);
+        });
+    }
+
+    function selecionarResposta(e)
+    {
+        const botaoSelecionado = e.target;
+        const resposta = speedQuiz[perguntaAtual].resposta;
+
+        if(botaoSelecionado.innerText == resposta)
+        {
+            certas++
+        }
+        else
+        {
+            erradas++
+        }
+
+        perguntaAtual++
+
+        if (perguntaAtual < speedQuiz.length) 
+        {
+            mostrarPergunta();
+        } 
+        else 
+        {
+            mostrarResultado();
+        }
+    }
+
+    function mostrarResultado()
+    {
+        quiz.innerHTML = `
+        <h1 class="titulo-site">Quiz finalizado!</h1>
+        `
+        quiz.innerHTML +=`
+        <br><h1 class="titulo-site">Retornando à dashboard...</h1>
+        `
+        setTimeout(()=>{
+            window.location.href = "./dashboard.html"
+        },3000);
+    }
+
+    mostrarPergunta();
+</script>

@@ -24,17 +24,28 @@
             <h1 class="titulo-navbar">
                 <a href="../index.html">Speed Site</a>
             </h1>
-            <ul class="navbar">
-                Bem-vindo ao quiz!
-            </ul>
+            <div class="navbar" id="div_nome">
+              Olá, bem vindo à dashboard!
+            </div>
         </div>
     </div>
 
     <section class="dashboard">
+      <h1 class="titulo-site">Dashboard</h1>
         <div class="container-graficos">
-            <div class="div-graficos">
+            <div class="div-graficos-pizza">
                 <canvas id="ultimaTentativa"></canvas>
+                <div class="titulo-grafico">Erros e acertos da ultima tentativa</div>
             </div>
+            <div class="div-graficos-barra">
+              <canvas id="todasTentativas"></canvas>
+              <div class="titulo-grafico">Erros e acertos de todas as tentativas</div>
+            </div>
+        </div>
+        <div class="container-botao">
+          <a href="./quiz.html">
+            <button class="botao">Fazer o quiz</button>
+          </a>
         </div>
     </section>
 </body>
@@ -56,11 +67,38 @@ new Chart(ultimaTentativa, {
   options: {
     scales: {
       y: {
-        beginAtZero: true,
+        beginAtZero: true,  
         display: false
       }
     }
   }
 });
 
+const todasTentativas = document.getElementById('todasTentativas').getContext('2d');
+
+new Chart(todasTentativas, {
+  type: 'bar',
+  data: {
+    labels: ['1ª Tentativa', '2ª Tentativa'],
+    datasets: [{
+      label: 'Acertos',
+      data: [7, 3],
+      borderWidth: 1,
+      backgroundColor: '#0000FF'
+    },
+    {
+      label: 'Erros',
+      data: [3, 7],
+      borderWidth: 1,
+      backgroundColor: '#FF0000'
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      }
+    }
+  }
+});
 </script>
