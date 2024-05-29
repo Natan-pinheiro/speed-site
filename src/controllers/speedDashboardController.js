@@ -1,9 +1,9 @@
-var aquarioModel = require("../models/aquarioModel");
+var speedDashboardModel = require("../models/speedDashboardModel");
 
-function buscarResultadoQuiz(req, res) {
+function buscarResultadoLogin(req, res) {
   var idUsuario = req.params.idUsuario;
 
-  speedDashboardModel.buscarResultadoQuiz(idUsuario).then((resultado) => {
+  speedDashboardModel.buscarResultadoLogin(idUsuario).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {
@@ -17,25 +17,34 @@ function buscarResultadoQuiz(req, res) {
 }
 
 
-function cadastrarTentativa(req, res) {
-  var idQuiz = req.body.descricao;
-  var idUsuario = req.body.idUsuario;
+function salvarTentativa(req, res) {
+  var idQuiz = req.body.quizServer;
+  console.log(idQuiz);
+  var idUsuario = req.body.usuarioServer;
+  console.log(idUsuario);
+  var certas = req.body.erradasServer;
+  console.log(certas);
+  var erradas = req.body.certasServer;
+  console.log(erradas);
+
 
   if (idQuiz == undefined) {
-    res.status(400).send("quiz está undefined!");
-  } else if (idUsuario == undefined) {
-    res.status(400).send("idUsuario está undefined!");
+    res.status(400).send("Quiz está undefined!");
+  } else if (erradas == undefined) {
+    res.status(400).send("erradas está undefined!");
+  } else if (certas == undefined) {
+    res.status(400).send("certas está undefined!");
   } else {
 
 
-    speedDashboardModel.cadastrarTentativa(idUsuario, idQuiz, acertos, erros)
+    speedDashboardModel.salvarTentativa(idUsuario, idQuiz, certas, erradas)
       .then((resultado) => {
         res.status(201).json(resultado);
       }
       ).catch((erro) => {
         console.log(erro);
         console.log(
-          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          "\nHouve um erro ao realizar o cadastro de tentativa! Erro: ",
           erro.sqlMessage
         );
         res.status(500).json(erro.sqlMessage);
@@ -44,6 +53,6 @@ function cadastrarTentativa(req, res) {
 }
 
 module.exports = {
-  buscarResultadoQuiz,
-  cadastrarTentativa
+  buscarResultadoLogin,
+  salvarTentativa
 }

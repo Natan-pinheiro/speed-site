@@ -6,7 +6,7 @@
     height: 90%;
     width: 100%;
 
-    background-image: url(https://cinema.indiana.edu/film_images/speedracer.jpg);
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://cinema.indiana.edu/film_images/speedracer.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }

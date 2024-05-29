@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     background-color: aliceblue;
-    margin-top: 5%;
+    margin-top: 2%;
     border-radius: 10px;
     width: 20%;
     height: 400px;
@@ -33,7 +33,7 @@
 .div-graficos-barra{
     background-color: aliceblue;
     border-radius: 10px;
-    margin-top: 5%;
+    margin-top: 1%;
     width: 50%;
     height: 10%;
 }

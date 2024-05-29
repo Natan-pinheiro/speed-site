@@ -1,17 +1,18 @@
-.diretoras{
-        height: 110%;
-        width: 100%;
-    
-        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://www.intofilm.org/intofilm-production/scaledcropped/1096x548https%3A/s3-eu-west-1.amazonaws.com/images.cdn.filmclub.org/film__4427-speed-racer--hi_res-91a81b00.jpg/film__4427-speed-racer--hi_res-91a81b00.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
+.original{
+
+    height: 110%;
+    width: 100%;
+
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://www.moneyreport.com.br/wp-content/uploads/2023/07/Speed-Racer.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-.diretoras-container{
+.original-container{
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.texto-diretoras{
+.texto-original{
     width: 50%;
     text-align: center;
     color: white;
@@ -24,13 +25,12 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 30px;
     font-weight: bolder;
-
 }
-.card-diretoras{
+.card-original{
     height: 331px;
     width: 244px;
 }
-.card-diretoras img{
+.card-original img{
     height: 331px;
     width: 244px;
 
@@ -41,7 +41,7 @@
     border-color: yellow;
     border-radius: 10px;
 }
-.nome-diretoras{
+.nome-original{
     height: 60px;
     align-items: center;
     justify-content: center;
@@ -57,28 +57,4 @@
     font-weight: bolder;
     text-align: center;
 }
-.matrix-container{
-    margin-top: 10px;
-    display: flex;
-    height: 200px;
-    align-items: center;
-    justify-content: center;
-}
-.matrix-container img{
-    height: 180px;
-    width: 140px;
 
-    border: solid;
-    border-color: black;
-    border-width: 5px;
-}
-.matrix-container div{
-    display: flex;
-    justify-content: space-between;
-    width: 40%;
-    background-color: red;
-    border: solid;
-    border-color: yellow;
-    border-radius: 10px;
-    padding: 10px;
-}

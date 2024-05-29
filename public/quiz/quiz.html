@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/quiz/header.css">
     <link rel="stylesheet" href="../css/quiz/quiz.css">
+
+    
     
     <link rel="icon" href="../assets/icon/speed-icon.ico" type="image/x-icon">
 </head>
@@ -43,7 +45,7 @@
         resposta: "Mom Racer"
         },
         {
-        pergunta: "Qual o nome do carro dirigido por speed, no final do filme?",
+        pergunta: "Qual o nome do carro sucessor do Mach 5?",
         alternativas: ["Augury", "Seppuku", "Mach 6", "Shooting Star"],
         resposta: "Mach 6"
         },
@@ -82,9 +84,12 @@
     const perguntaElemento = document.getElementById("pergunta");
     const alternativas = document.getElementById("alternativas");
 
+    const idQuiz = 1;
+    const idUsuario = sessionStorage.ID_USUARIO;
+
     let perguntaAtual = 0;
-    let certas = 0;
-    let erradas = 0;
+    let certasVar = 0;
+    let erradasVar = 0;
 
     function mostrarPergunta()
     {
@@ -109,11 +114,11 @@
 
         if(botaoSelecionado.innerText == resposta)
         {
-            certas++
+            certasVar++
         }
         else
         {
-            erradas++
+            erradasVar++
         }
 
         perguntaAtual++
@@ -139,6 +144,21 @@
         setTimeout(()=>{
             window.location.href = "./dashboard.html"
         },3000);
+
+        fetch("/speedDashboard/salvarTentativa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    quizServer: idQuiz,
+                    usuarioServer: idUsuario,
+                    certasServer: certasVar,
+                    erradasServer: erradasVar
+                })
+            })
+
+
     }
 
     mostrarPergunta();

@@ -54,9 +54,9 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                       speedDashboardModel.buscarResultadoQuiz(resultadoAutenticar[0].idUsuario)
-                            .then((resultadoQuiz) => {
-                                if (resultadoQuiz.length > 0) {
+                       speedDashboardModel.buscarResultadoLogin(resultadoAutenticar[0].idUsuario)
+                            .then((resultadoLogin) => {
+                                if (resultadoLogin.length > 0) {
                                     res.json({
                                         id: resultadoAutenticar[0].idUsuario,
                                         email: resultadoAutenticar[0].email,

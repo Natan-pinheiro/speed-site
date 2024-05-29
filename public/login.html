@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="stylesheet" href="./css/global.css">
 
+
     <link rel="icon" href="./assets/icon/speed-icon.ico" type="image/x-icon">
 </head>
 <body>
@@ -30,9 +31,9 @@
     </div>
     <div class="container-login">
         <div class="login">
-            <label for="email">Email:</label><br>
+            Email:
             <input class="input-login" type="text" id="input_email" name="email" placeholder="speed.racer@email.com"><br>
-            <label for="senha">Senha:</label><br>
+            Senha:
             <input class="input-login" type="password" id="input_senha" name="senha" placeholder="XXXXXXXXXXXXX"><br>
             <br>
             <button class="botao" onclick="entrar()">Login</button>
@@ -46,10 +47,10 @@
         
         
         var emailVar = input_email.value;
-        console.log(emailVar)
+        console.log(emailVar);
         var senhaVar = input_senha.value;
-        console.log(senhaVar)
-
+        console.log(senhaVar);
+    
         if (emailVar == "" || senhaVar == "") {
             erros.style.display = "block";
             erros.innerHTML = "Preencha todos os campos!";
@@ -58,7 +59,7 @@
        
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
-
+    
         fetch("/speedUsuarios/autenticar", {
             method: "POST",
             headers: {
@@ -67,7 +68,6 @@
             body: JSON.stringify({
                 emailServer: emailVar,
                 senhaServer: senhaVar
-                
             })
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
@@ -82,43 +82,45 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
+
                 });
-                erros.style.display = "block";
-                erros.innerHTML ="Login realizado com sucesso! Redirecionando para o quiz...";
                 setTimeout(function () {
                         window.location = "./quiz/dashboard.html";
-
+    
                     }, 3000);
 
+                erros.style.display = "block";
+                erros.innerHTML +="Login realizado! Redirecionando para a dashboard...";
+    
             } else {
-
+    
                 erros.style.display = "block";
                 erros.innerHTML +="<br>Login não encontrado, faça seu cadastro!";
                 limparErros();
-
+    
                 console.log("Houve um erro ao tentar realizar o login!");
-
+    
                 resposta.text().then(texto => {
                     console.error(texto);
                 });
             }
-
+    
         }).catch(function (erro) {
             console.log(erro);
         })
-
+    
         return false;
-
-}
-
+    
+    }
+    
        
-
+    
         
     function limparErros()
     {
         setTimeout(()=>{
             const erros = document.getElementById("erros")
-
+    
             erros.style.display = "none"
             erros.innerHTML = "";
         },3000);
