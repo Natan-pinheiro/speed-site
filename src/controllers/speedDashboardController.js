@@ -22,9 +22,9 @@ function salvarTentativa(req, res) {
   console.log(idQuiz);
   var idUsuario = req.body.usuarioServer;
   console.log(idUsuario);
-  var certas = req.body.erradasServer;
+  var certas = req.body.certasServer;
   console.log(certas);
-  var erradas = req.body.certasServer;
+  var erradas = req.body.erradasServer;
   console.log(erradas);
 
 

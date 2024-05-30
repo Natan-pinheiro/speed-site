@@ -33,43 +33,158 @@
     </div>
 
     <section class="dashboard">
-      <h1 class="titulo-site">Dashboard</h1>
+      <h1 class="titulo-site">Speed Dashboard</h1>
         <div class="container-graficos">
             <div class="div-graficos-pizza">
-                <canvas id="ultimaTentativa"></canvas>
-                <div class="titulo-grafico">Erros e acertos da ultima tentativa</div>
+                <canvas id="acertosErrosGeral"></canvas>
+                <div class="titulo-grafico">Realize o quiz para saber seu desempenho!</div>
             </div>
             <div class="div-graficos-barra">
               <canvas id="todasTentativas"></canvas>
-              <div class="titulo-grafico">Erros e acertos de todas as tentativas</div>
+              <div class="titulo-grafico" id="tituloGrafico">Realize o quiz para saber seu desempenho!</div>
             </div>
         </div>
         <div class="container-botao">
           <a href="./quiz.html">
-            <button class="botao">Fazer o quiz</button>
+            <button class="botao" onclick="pegarIdQuiz()">Fazer o quiz</button>
           </a>
         </div>
     </section>
 </body>
 </html>
 <script>
-    nome = sessionStorage.NOME_USUARIO;
+    const nome = sessionStorage.NOME_USUARIO;
+    const idUsuarioVar = sessionStorage.ID_USUARIO;
     div_nome.innerHTML = `Olá ${nome}, bem vindo ao quiz!`
-function obterDadosGrafico(idTentativa) {
+    const idTentativa = 1;
 
-alterarTitulo(idAquario)
+    let proximaAtualizacao;
+
+    window.onload = function() {
+        obterDadosGrafico();
+        buscarErrosAcertosGeral();
+    };
+        
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+
+    function obterDadosGrafico(idUsuario) {
+
+        // alterarTitulo(idAquario)
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas/${idUsuarioVar}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idTentativa);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta, idTentativa) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: ['Última tentativa', 'Penúltima tentativa', 'Antepenúltima tentativa'],
+            datasets: [{
+                label: 'Acertos',
+                data: [],
+                fill: false,
+                tension: 0.1,
+                backgroundColor: '#00FF00'
+            },
+            {
+                label: 'Erros',
+                data: [],
+                fill: false,
+                tension: 0.1,
+                backgroundColor: '#FF0000'
+
+        }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.momento_grafico);
+            dados.datasets[0].data.push(registro.acertos);
+            dados.datasets[1].data.push(registro.erros);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let todasTentativas = new Chart(
+            document.getElementById(`todasTentativas`),
+            config
+        );
+
+
+         
+
+    };
+
+    function buscarErrosAcertosGeral(idUsuario) {
 
 if (proximaAtualizacao != undefined) {
     clearTimeout(proximaAtualizacao);
 }
 
-fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+fetch(`/medidas/geral/${idUsuarioVar}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
 
-            plotarGrafico(resposta, idAquario);
+            plotarGrafico2(resposta, idTentativa);
 
         });
     } else {
@@ -80,4 +195,70 @@ fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (res
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
+
+
+// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+// A função *plotarGrafico* também invoca a função *atualizarGrafico*
+function plotarGrafico2(resposta, idTentativa) {
+
+console.log('iniciando plotagem do gráfico...');
+
+// Criando estrutura para plotar gráfico - labels
+let labels = [];
+
+// Criando estrutura para plotar gráfico - dados
+let dados = {
+    labels: ['Total de pontos'],
+    datasets: [{
+        label: 'Acertos',
+        data: [],
+        tension: 0.1,
+        backgroundColor: '#00FF00'
+    },
+    {
+        label: 'Erros',
+        data: [],
+        tension: 0.1,
+        backgroundColor: '#FF0000'
+
+}]
+};
+
+console.log('----------------------------------------------')
+console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+for (i = 0; i < resposta.length; i++) {
+    var registro = resposta[i];
+    labels.push(registro.momento_grafico);
+    dados.datasets[0].data.push(registro.totalAcertos);
+    dados.datasets[1].data.push(registro.totalErros);
+}
+
+console.log('----------------------------------------------')
+console.log('O gráfico será plotado com os respectivos valores:')
+console.log('Labels:')
+console.log(labels)
+console.log('Dados:')
+console.log(dados.datasets)
+console.log('----------------------------------------------')
+
+// Criando estrutura para plotar gráfico - config
+const config = {
+    type: 'bar',
+    data: dados,
+};
+
+// Adicionando gráfico criado em div na tela
+let todasTentativas = new Chart(
+    document.getElementById(`acertosErrosGeral`),
+    config
+);
+
+
+
+};
+
 </script>

@@ -18,11 +18,12 @@
     background-color: aliceblue;
     margin-top: 2%;
     border-radius: 10px;
-    width: 20%;
+    width: 40%;
     height: 400px;
+    padding-bottom: 30px;
 }
 .titulo-grafico{
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +35,7 @@
     background-color: aliceblue;
     border-radius: 10px;
     margin-top: 1%;
-    width: 50%;
+    width: 40%;
     height: 10%;
 }
 .container-botao{
