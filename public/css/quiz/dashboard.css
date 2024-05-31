@@ -28,6 +28,13 @@
     width: 40%;
     height: 10%;
 }
+.div-graficos-pizza{
+    background-color: aliceblue;
+    border-radius: 10px;
+    margin-top: 1%;
+    width: 19%;
+    height: 20%;
+}
 .container-botao{
     display: flex;
     justify-content: center;
