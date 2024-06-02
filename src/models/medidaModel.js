@@ -17,8 +17,8 @@ function buscarUltimasMedidas(idUsuario) {
 function buscarErrosAcertosGeral(idUsuario) {
 
     var instrucaoSql = `SELECT 
-        sum(certas) as 'totalAcertos',
-        sum(erradas) as 'totalErros'
+        truncate(avg(certas), 0) as 'totalAcertos',
+        truncate(avg(erradas), 0) as 'totalErros'
                     FROM tentativa
                     WHERE fkUsuario = ${idUsuario}
                     AND fkQuiz = 1`;
