@@ -60,6 +60,7 @@
     font-weight: bolder;
     font-size: 30px;
     transition-duration: 300ms;
+    margin-top: 30px;
 }
 .quiz > button:hover{
     background-color: #ba0000;

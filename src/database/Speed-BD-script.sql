@@ -23,7 +23,7 @@ CREATE TABLE tentativa(
     constraint fkUsuarioTentativa foreign key (fkUsuario)
 		references usuario(idUsuario),
 	constraint fkQuizTentativa foreign key (fkQuiz)
-		references quiz(idQuiz),
+		references quiz(idQuiz),c
 	
     certas int,
     erradas int
