@@ -34,6 +34,6 @@ INSERT INTO quiz VALUES
     (default, 'Quiz: bastidores', 'Quiz mais focado nos bastidores'),
     (default, 'Quiz: personagens', 'Quiz mais focado nos personagens');
 
-SELECT * FROM quiz;
-SELECT * FROM usuario;
-SELECT * FROM tentativa;
+SELECT * FROM quiz WHERE idQuiz = 1;
+SELECT nome, email FROM usuario;
+SELECT certas, erradas FROM tentativa WHERE fkUsuario = 2;

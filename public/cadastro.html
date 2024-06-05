@@ -19,8 +19,12 @@
             <h1 class="titulo-navbar"><a href="./index.html">Speed Site</a></h1>
             <ul class="navbar">
                 <li>
+                    <h1 class="titulo-site">Cadastro</h1>
+                </li>
+                <li>
                     <a href="./login.html">Ir para o login</a>
                 </li>
+                
             </ul>
         </div>
     </div>
@@ -28,7 +32,9 @@
     <div id="erros" class="div-erros">
 
     </div>
+    
     <div class="container-cadastro">
+        
         <div class="cadastro">
             Nome:
             <input class="input-cadastro" type="text" id="input_nome" name="nome" placeholder="Speed Racer"><br>
@@ -79,7 +85,7 @@
             erros.style.display = "block";
             erros.innerHTML = "Insira um email válido!";
         }
-        else if(senhaVar.length <= 5)
+        else if(senhaVar.length < 5)
         {
             erros.style.display = "block";
             erros.innerHTML = "A senha precisa ter mais que 5 caracteres!";
