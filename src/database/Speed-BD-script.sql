@@ -23,7 +23,7 @@ CREATE TABLE tentativa(
     constraint fkUsuarioTentativa foreign key (fkUsuario)
 		references usuario(idUsuario),
 	constraint fkQuizTentativa foreign key (fkQuiz)
-		references quiz(idQuiz),c
+		references quiz(idQuiz),
 	
     certas int,
     erradas int
@@ -34,6 +34,13 @@ INSERT INTO quiz VALUES
     (default, 'Quiz: bastidores', 'Quiz mais focado nos bastidores'),
     (default, 'Quiz: personagens', 'Quiz mais focado nos personagens');
 
+<<<<<<< HEAD
 SELECT * FROM quiz WHERE idQuiz = 1;
 SELECT nome, email FROM usuario;
 SELECT certas, erradas FROM tentativa WHERE fkUsuario = 2;
+=======
+SELECT * FROM quiz;
+SELECT * FROM usuario;
+SELECT acertos, erros, nome FROM tentativa
+    JOIN usuario ON fkUsuario = idUsuario;
+>>>>>>> 57dadcffa8f05366a2559cdf39f6e03ba2601f96
